@@ -63,8 +63,8 @@ class TopologyRetarget(bpy.types.Operator):
     def rotate_point(self, point, angle, axis, pivot):
         R = mathutils.Matrix.Rotation(angle, 4, axis)
         T = mathutils.Matrix.Translation(pivot)
-        M = T * R * T.inverted()
-        return (M * point)
+        M = T @ R @ T.inverted()
+        return (M @ point)
 
 
     def retarget(self, target, retargetData,  source):
